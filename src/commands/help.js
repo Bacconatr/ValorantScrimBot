@@ -28,7 +28,9 @@ module.exports = exports = {
       ${process.env.PREFIX}invite: Invite the bot to your server!
       ${process.env.PREFIX}ping: Play a game of ping pong.
       ${process.env.PREFIX}register: Register to join matches.
-      ${process.env.PREFIX}support: Join our support server.`)
+      ${process.env.PREFIX}support: Join our support server.
+      ${process.env.PREFIX}testing: hello world`)
+      
     message.channel.send(embed)
   }
 }
