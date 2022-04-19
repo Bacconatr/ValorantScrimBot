@@ -42,16 +42,16 @@ const add = async (message, GLOBALS) => {
   const reply = await message.reply(embed)
 
   // Match Notifications
-  let matchNotifications = await message.channel.awaitMessages(m => m.author === message.author, { max: 1, time: 60000, errors: ['time'] }).catch(e => message.reply('Time has run out. To setup your server, please run `v!server add` again.'))
+  let matchNotifications = await message.channel.awaitMessages(m => m.author === message.author, { max: 1, time: 60000, errors: ['time'] }).catch(e => message.reply('Time has run out. To setup your server, please run `s!server add` again.'))
   matchNotifications = checkRoleValidity(matchNotifications.first().content)
-  if (!matchNotifications) return message.reply('That is not a valid role! Please run `v!server add` again.')
+  if (!matchNotifications) return message.reply('That is not a valid role! Please run `s!server add` again.')
 
   // Valorant Rank Roles
   embed.fields[0].name = '✅ 1. Match Notification Role'
   embed.addField('2. Valorant Rank Roles', 'ScrimBot has the feature to create and give users a role based on their ranks. Would you like this? (yes or no)')
   reply.edit(embed)
 
-  let valorantRankRoles = await message.channel.awaitMessages(m => m.author === message.author, { max: 1, time: 60000, errors: ['time'] }).catch(e => message.reply('Time has run out. To setup your server, please run `v!server add` again.'))
+  let valorantRankRoles = await message.channel.awaitMessages(m => m.author === message.author, { max: 1, time: 60000, errors: ['time'] }).catch(e => message.reply('Time has run out. To setup your server, please run `s!server add` again.'))
   valorantRankRoles = CONSTANTS.AFFIRMATIVE_WORDS.includes(valorantRankRoles.first().content.toLowerCase())
   let rankRoleIDs
   if (valorantRankRoles) {
@@ -111,5 +111,5 @@ const info = async (message, GLOBALS) => {
  */
 const edit = async (message, GLOBALS) => {
   const guildInformation = await GLOBALS.mongoDb.collection('guilds').findOne({ _id: message.guild.id })
-  if (!guildInformation) return message.reply('This server has not been configured yet. Please run v!server add')
+  if (!guildInformation) return message.reply('This server has not been configured yet. Please run s!server add')
 }

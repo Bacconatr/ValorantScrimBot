@@ -31,7 +31,7 @@ module.exports = exports = {
 const create = async (message, GLOBALS) => {
   if (!message.guild) return message.reply('This command can only be run in a server!')
   if (await GLOBALS.userIsRegistered(message.author.id) === false) {
-    message.reply('You are not registered with ScrimBot. Please type `v!register` before creating a match!')
+    message.reply('You are not registered with ScrimBot. Please type `s!register` before creating a match!')
     return
   }
 
@@ -67,7 +67,7 @@ const create = async (message, GLOBALS) => {
 const createSerious = async (message, GLOBALS) => {
   if (!message.guild) return message.reply('This command can only be run in a server!')
   if (await GLOBALS.userIsRegistered(message.author.id) === false) {
-    message.reply('You are not registered with ScrimBot. Please type `v!register` before creating a match!')
+    message.reply('You are not registered with ScrimBot. Please type `s!register` before creating a match!')
     return
   }
 
@@ -77,7 +77,7 @@ const createSerious = async (message, GLOBALS) => {
     .setTitle('Create a serious match')
     .setDescription('Let\'s start a match!')
     .setAuthor(message.author.tag, message.author.avatarURL())
-    .addField(CONSTANTS.matchCreationSteps[0][0], CONSTANTS.matchCreationSteps[0][1])
+    .addField(CONSTANTS.matchCreationStepsSerious[0][0], CONSTANTS.matchCreationSteps[0][1])
 
   const creationMessage = await message.channel.send(embed)
   const reaction = await creationMessage.react('❌')
@@ -232,7 +232,7 @@ const start = async (message, GLOBALS) => {
 
   const embed = new GLOBALS.Embed()
     .setTitle('Match Started')
-    .setDescription('Match with ID `' + matchID + '` has been started. Once complete, use `v!match score <match id> <score>` to report the score!')
+    .setDescription('Match with ID `' + matchID + '` has been started. Once complete, use `s!match score <match id> <score>` to report the score!')
     .setFooter('This message will self-destruct in 30 seconds.')
   if (!message.guild.me.hasPermission('MANAGE_CHANNELS')) embed.addField('Note', 'If you give ScrimBot the `Manage Channels` and `Move Members` permissions, it can automatically create voice channels for each team and move players into them!')
   message.reply(embed).then(msg => {
@@ -282,7 +282,7 @@ const score = async (message, GLOBALS) => {
 
   const embed = new GLOBALS.Embed()
     .setTitle('Match Completed')
-    .setDescription('Match with ID `' + matchID + '` has been completed. Thanks for using ScrimBot, to create a new match type `v!match create`')
+    .setDescription('Match with ID `' + matchID + '` has been completed. Thanks for using ScrimBot, to create a new match type `s!match create`')
     .setFooter('This message will self-destruct in 30 seconds.')
   message.reply(embed).then(msg => {
     msg.delete({ timeout: 30000 })
@@ -333,7 +333,7 @@ const cancel = async (message, GLOBALS) => {
 
   const embed = new GLOBALS.Embed()
     .setTitle('Match Cancelled')
-    .setDescription('Match with ID `' + matchID + '` has been cancelled. Thanks for using ScrimBot, to create a new match type `v!match create`')
+    .setDescription('Match with ID `' + matchID + '` has been cancelled. Thanks for using ScrimBot, to create a new match type `s!match create`')
     .setFooter('This message will self-destruct in 30 seconds.')
   message.reply(embed).then(msg => {
     msg.delete({ timeout: 30000 })
