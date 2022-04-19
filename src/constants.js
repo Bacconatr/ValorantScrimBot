@@ -88,8 +88,8 @@ module.exports = exports = {
       //['2. Rank Minimum', 'What is the **MINIMUM** rank you are allowing into your tournament? If any, type "any".'],
      // ['3. Rank Maximum', 'What is the **MAXIMUM** rank you are allowing into your tournament? If any, type "any".'],
       //['4. Player Count', `How many players should be on each team? Max ${this.MAX_TEAM_COUNT}.`],
-      ['5. Spectators', 'Are spectators allowed?'],
-      ['6. Map', `Which map would you like to play on? Options are "${this.MAPS.map(m => this.capitalizeFirstLetter(m)).join('", "')}". If any, type "any".`],
+      ['2. Spectators', 'Are spectators allowed?'],
+      ['3. Map', `Which map would you like to play on? Options are "${this.MAPS.map(m => this.capitalizeFirstLetter(m)).join('", "')}". If any, type "any".`],
       //['7. Game Mode', `What game mode would you like? Options are "${this.GAME_MODES.map(m => this.capitalizeFirstLetter(m)).join('", "')}".`]
     ]
   },
@@ -100,8 +100,8 @@ module.exports = exports = {
       ['2. Rank Minimum', 'What is the **MINIMUM** rank you are allowing into your tournament? If any, type "any".'],
       ['3. Rank Maximum', 'What is the **MAXIMUM** rank you are allowing into your tournament? If any, type "any".'],
       //['4. Player Count', `How many players should be on each team? Max ${this.MAX_TEAM_COUNT}.`],
-      ['5. Spectators', 'Are spectators allowed?'],
-      ['6. Map', `Which map would you like to play on? Options are "${this.MAPS.map(m => this.capitalizeFirstLetter(m)).join('", "')}". If any, type "any".`],
+      ['4. Spectators', 'Are spectators allowed?'],
+      ['5. Map', `Which map would you like to play on? Options are "${this.MAPS.map(m => this.capitalizeFirstLetter(m)).join('", "')}". If any, type "any".`],
       //['7. Game Mode', `What game mode would you like? Options are "${this.GAME_MODES.map(m => this.capitalizeFirstLetter(m)).join('", "')}".`]
     ]
   },

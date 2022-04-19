@@ -31,63 +31,29 @@ const handleMatchCreation = async (matchRecord, userMessage, GLOBALS) => {
   const content = userMessage.content.toLowerCase()
   switch (matchRecord.step) {
     case 0: {
+
+      matchRecord.creationInformation.rankMinimum = 0
+      matchRecord.creationInformation.rankMaximum = 99
+      matchRecord.creationInformation.maxTeamCount = 5
+      matchRecord.creationInformation.mode = 'standard'
+
       const date = chrono.parseDate(`${userMessage.content} ${moment.tz.zone(process.env.TIME_ZONE).abbr(Date.now())}`)
       if (!date) return userMessage.reply('please give a valid date!').then(msg => msg.delete({ timeout: 5000 }))
       matchRecord.creationInformation.date = date
       break
     }
+    
 
+        
     case 1: {
-        matchRecord.creationInformation.rankMinimum = 0;
-        break
-      /*
-      if (content === 'any') {
-        matchRecord.creationInformation.rankMinimum = 0
-        break
-      } else if (!CONSTANTS.RANKS[userMessage.content.toUpperCase()]) {
-        return userMessage.reply('please give a valid rank!').then(msg => msg.delete({ timeout: 5000 }))
-      } else {
-        matchRecord.creationInformation.rankMinimum = CONSTANTS.RANKS[userMessage.content.toUpperCase()] // TODO: cover edge cases
-        break
-      }
-      */
-    }
-
-    case 2: {
-
-        matchRecord.creationInformation.rankMaximum = 99;
-        break
-      /*
-      if (content === 'any') {
-        matchRecord.creationInformation.rankMaximum = 99
-        break
-      } else if (!CONSTANTS.RANKS[userMessage.content.toUpperCase()]) {
-        return userMessage.reply('please give a valid rank!').then(msg => msg.delete({ timeout: 5000 }))
-      } else if (CONSTANTS.RANKS[userMessage.content.toUpperCase()] < matchRecord.creationInformation.rankMinimum) {
-        return userMessage.reply('the maximum rank cannot be below the minimum rank!').then(msg => msg.delete({ timeout: 5000 }))
-      } else {
-        matchRecord.creationInformation.rankMaximum = CONSTANTS.RANKS[userMessage.content.toUpperCase()] // TODO: cover edge cases
-        break
-      }
-      */
-    }
-/*
-    case 3: {
-      if (!Number(content)) {
-        return userMessage.reply('please give a valid number!').then(msg => msg.delete({ timeout: 5000 }))
-      } else if (Number(content) > CONSTANTS.MAX_TEAM_COUNT || Number(content) < 1) {
-        return userMessage.reply('that number does not fit the amount of players allowed on a team, which is ' + CONSTANTS.MAX_TEAM_COUNT).then(msg => msg.delete({ timeout: 5000 }))
-      } else {
-        matchRecord.creationInformation.maxTeamCount = Number(content)
-        break
-      }
-    }
-*/
-    case 3:
       matchRecord.creationInformation.spectators = (CONSTANTS.AFFIRMATIVE_WORDS.includes(content)) ? [] : false
       break
+    
+    }
 
-    case 4: {
+  
+
+    case 2: {
       if (content === 'any') {
         matchRecord.creationInformation.map = CONSTANTS.MAPS[Math.floor(Math.random() * Math.floor(CONSTANTS.MAPS.length))]
         break
@@ -98,16 +64,7 @@ const handleMatchCreation = async (matchRecord, userMessage, GLOBALS) => {
         return userMessage.reply('please give a valid map!').then(msg => msg.delete({ timeout: 5000 }))
       }
     }
-/*
-    case 6: {
-      if (CONSTANTS.GAME_MODES.includes(content)) {
-        matchRecord.creationInformation.mode = CONSTANTS.GAME_MODES.find(e => e === content) || content
-        break
-      } else {
-        return userMessage.reply('please give a valid game mode!').then(msg => msg.delete({ timeout: 5000 }))
-      }
-    }
-  */
+
   }
 
   if (matchRecord.step < CONSTANTS.matchCreationSteps.length - 1) {
@@ -127,7 +84,7 @@ const handleMatchCreation = async (matchRecord, userMessage, GLOBALS) => {
     const embed = new GLOBALS.Embed()
       .setAuthor(userMessage.author.tag, userMessage.author.avatarURL())
       .setTitle('Match Creation Complete')
-      .setDescription('Your match has been made! To start it, type `v!match start <match id>`')
+      .setDescription('Your match has been made! To start it, type `s!match start <match id>`')
       .setFooter('This message will self-destruct in 30 seconds.')
     matchRecord.botMessage.edit(embed)
     matchRecord.botMessage.delete({ timeout: 30000 })
@@ -248,7 +205,7 @@ const handleMatchCreationSerious = async (matchRecord, userMessage, GLOBALS) => 
     }
   }
 
-  if (matchRecord.step < CONSTANTS.matchCreationSteps.length - 1 || matchRecord.step < CONSTANTS.matchCreationStepsSerious.length - 1) {
+  if (matchRecord.step < CONSTANTS.matchCreationStepsSerious.length - 1) {
     const embed = matchRecord.botMessage.embeds[0]
 
     const previousField = embed.fields[matchRecord.step]
@@ -256,7 +213,7 @@ const handleMatchCreationSerious = async (matchRecord, userMessage, GLOBALS) => 
 
     matchRecord.step = matchRecord.step + 1
 
-    const stepInfo = CONSTANTS.matchCreationSteps[matchRecord.step]
+    const stepInfo = CONSTANTS.matchCreationStepsSerious[matchRecord.step]
     embed.addField(stepInfo[0], stepInfo[1])
     matchRecord.botMessage.edit(embed)
 
