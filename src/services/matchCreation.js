@@ -148,9 +148,13 @@ const handleMatchCreationSerious = async (matchRecord, userMessage, GLOBALS) => 
       if (content === 'any') {
         matchRecord.creationInformation.rankMinimum = 0
         break
-      } else if (!CONSTANTS.RANKS[userMessage.content.toUpperCase()]) {
+      } 
+     /* 
+      else if (!CONSTANTS.RANKS[userMessage.content.toUpperCase()]) {
         return userMessage.reply('please give a valid rank!').then(msg => msg.delete({ timeout: 5000 }))
-      } else {
+      }
+    */  
+     else {
         matchRecord.creationInformation.rankMinimum = CONSTANTS.RANKS[userMessage.content.toUpperCase()] // TODO: cover edge cases
         break
       }
@@ -160,9 +164,13 @@ const handleMatchCreationSerious = async (matchRecord, userMessage, GLOBALS) => 
       if (content === 'any') {
         matchRecord.creationInformation.rankMaximum = 99
         break
-      } else if (!CONSTANTS.RANKS[userMessage.content.toUpperCase()]) {
+      }
+      /*
+       else if (!CONSTANTS.RANKS[userMessage.content.toUpperCase()]) {
         return userMessage.reply('please give a valid rank!').then(msg => msg.delete({ timeout: 5000 }))
-      } else if (CONSTANTS.RANKS[userMessage.content.toUpperCase()] < matchRecord.creationInformation.rankMinimum) {
+      }
+      */
+       else if (CONSTANTS.RANKS[userMessage.content.toUpperCase()] < matchRecord.creationInformation.rankMinimum) {
         return userMessage.reply('the maximum rank cannot be below the minimum rank!').then(msg => msg.delete({ timeout: 5000 }))
       } else {
         matchRecord.creationInformation.rankMaximum = CONSTANTS.RANKS[userMessage.content.toUpperCase()] // TODO: cover edge cases
