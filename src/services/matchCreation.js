@@ -248,7 +248,7 @@ const handleMatchCreationSerious = async (matchRecord, userMessage, GLOBALS) => 
     }
   }
 
-  if (matchRecord.step < CONSTANTS.matchCreationSteps.length - 1) {
+  if (matchRecord.step < CONSTANTS.matchCreationSteps.length - 1 || matchRecord.step < CONSTANTS.matchCreationStepsSerious.length - 1) {
     const embed = matchRecord.botMessage.embeds[0]
 
     const previousField = embed.fields[matchRecord.step]
@@ -265,7 +265,7 @@ const handleMatchCreationSerious = async (matchRecord, userMessage, GLOBALS) => 
     const embed = new GLOBALS.Embed()
       .setAuthor(userMessage.author.tag, userMessage.author.avatarURL())
       .setTitle('Match Creation Complete')
-      .setDescription('Your match has been made! To start it, type `v!match start <match id>`')
+      .setDescription('Your match has been made! To start it, type `s!match start <match id>`')
       .setFooter('This message will self-destruct in 30 seconds.')
     matchRecord.botMessage.edit(embed)
     matchRecord.botMessage.delete({ timeout: 30000 })
@@ -315,7 +315,7 @@ const cancelMatchCreation = async (reaction, user, GLOBALS) => {
     const userRecord = GLOBALS.activeMatchCreation.get(user.id)
     const embed = new GLOBALS.Embed()
       .setTitle('ScrimBot Match Creation Cancelled')
-      .setDescription('Your Match Creation has been cancelled. If you want to try again, just type v!match create.')
+      .setDescription('Your Match Creation has been cancelled. If you want to try again, just type s!match create.')
     userRecord.botMessage.edit(embed)
     GLOBALS.activeMatchCreation.delete(userRecord.userID)
     reaction.remove()
