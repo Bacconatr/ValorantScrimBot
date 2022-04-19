@@ -55,8 +55,8 @@ const create = async (message, GLOBALS) => {
       players: { a: [], b: [] },
       spectators: false,
       map: 0,
-      rankMinimum: '',
-      rankMaximum: '',
+     // rankMinimum: '',
+      //rankMaximum: '',
       date: undefined,
       creator: message.author.id,
       status: 'created'
