@@ -13,6 +13,7 @@ module.exports = exports = {
   process: async (message, GLOBALS) => {
     switch (message.content.split(' ')[1]) {
       case 'create': create(message, GLOBALS); break
+      case 'create serious': createSerious(message, GLOBALS); break
       case 'start': start(message, GLOBALS); break
       case 'score': score(message, GLOBALS); break
       case 'cancel': cancel(message, GLOBALS); break
@@ -34,8 +35,46 @@ const create = async (message, GLOBALS) => {
     return
   }
 
+  
+
   const embed = new GLOBALS.Embed()
     .setTitle('Create a Match')
+    .setDescription('Let\'s start a match!')
+    .setAuthor(message.author.tag, message.author.avatarURL())
+    .addField(CONSTANTS.matchCreationSteps[0][0], CONSTANTS.matchCreationSteps[0][1])
+
+  const creationMessage = await message.channel.send(embed)
+  const reaction = await creationMessage.react('❌')
+  GLOBALS.activeMatchCreation.set(message.author.id, {
+    step: 0,
+    botMessage: creationMessage,
+    botReaction: reaction,
+    userID: message.author.id,
+    userMessage: message,
+    creationInformation: {
+      players: { a: [], b: [] },
+      spectators: false,
+      map: 0,
+      rankMinimum: '',
+      rankMaximum: '',
+      date: undefined,
+      creator: message.author.id,
+      status: 'created'
+    }
+  }) // add user to the list of users who are currently creating a match, and set their progress to 0 (none)
+}
+
+const createSerious = async (message, GLOBALS) => {
+  if (!message.guild) return message.reply('This command can only be run in a server!')
+  if (await GLOBALS.userIsRegistered(message.author.id) === false) {
+    message.reply('You are not registered with ScrimBot. Please type `v!register` before creating a match!')
+    return
+  }
+
+  
+
+  const embed = new GLOBALS.Embed()
+    .setTitle('Create a serious match')
     .setDescription('Let\'s start a match!')
     .setAuthor(message.author.tag, message.author.avatarURL())
     .addField(CONSTANTS.matchCreationSteps[0][0], CONSTANTS.matchCreationSteps[0][1])

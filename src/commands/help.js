@@ -12,6 +12,7 @@ module.exports = exports = {
       .setDescription(`
       **__MATCH COMMANDS__**
       ${process.env.PREFIX}match create: Create a match.
+      ${process.env.PREFIX}match create serious: Create a serious match with rank requirements, treat it like a scrim.
       ${process.env.PREFIX}match start <match id>: Start a match (only for match creator)
       ${process.env.PREFIX}match cancel <match id>: Cancel a match (must be match creator)
       ${process.env.PREFIX}match score <match id> <team a score>-<team b score>: Report final match score (only for match creator)
@@ -28,8 +29,7 @@ module.exports = exports = {
       ${process.env.PREFIX}invite: Invite the bot to your server!
       ${process.env.PREFIX}ping: Play a game of ping pong.
       ${process.env.PREFIX}register: Register to join matches.
-      ${process.env.PREFIX}support: Join our support server.
-      ${process.env.PREFIX}testing: hello world`)
+      ${process.env.PREFIX}support: Join our support server.`)
       
     message.channel.send(embed)
   }
