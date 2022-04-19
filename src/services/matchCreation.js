@@ -48,7 +48,7 @@ const handleMatchCreation = async (matchRecord, userMessage, GLOBALS) => {
         break
       }
     }
-
+/*
     case 2: {
       if (content === 'any') {
         matchRecord.creationInformation.rankMaximum = 99
@@ -73,7 +73,7 @@ const handleMatchCreation = async (matchRecord, userMessage, GLOBALS) => {
         break
       }
     }
-
+*/
     case 4:
       matchRecord.creationInformation.spectators = (CONSTANTS.AFFIRMATIVE_WORDS.includes(content)) ? [] : false
       break
@@ -89,7 +89,7 @@ const handleMatchCreation = async (matchRecord, userMessage, GLOBALS) => {
         return userMessage.reply('please give a valid map!').then(msg => msg.delete({ timeout: 5000 }))
       }
     }
-
+/*
     case 6: {
       if (CONSTANTS.GAME_MODES.includes(content)) {
         matchRecord.creationInformation.mode = CONSTANTS.GAME_MODES.find(e => e === content) || content
@@ -98,6 +98,7 @@ const handleMatchCreation = async (matchRecord, userMessage, GLOBALS) => {
         return userMessage.reply('please give a valid game mode!').then(msg => msg.delete({ timeout: 5000 }))
       }
     }
+  */
   }
 
   if (matchRecord.step < CONSTANTS.matchCreationSteps.length - 1) {
