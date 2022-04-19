@@ -12,7 +12,7 @@ module.exports = exports = {
     GLOBALS.client.on('message', async message => {
       if (message.author === GLOBALS.client.user || message.author.bot === true) return // ignore messages from the bot itself or other bots
       if (GLOBALS.activeMatchCreation.has(message.author.id)) handleMatchCreation(GLOBALS.activeMatchCreation.get(message.author.id), message, GLOBALS)
-      if(GLOBALS.activeMatchCreation.has(message.author.id)) handleMatchCreationSerious(GLOBALS.activeMatchCreation.get(message.author.id),message,GLOBALS)
+      if (GLOBALS.activeMatchCreation.has(message.author.id)) handleMatchCreationSerious(GLOBALS.activeMatchCreation.get(message.author.id),message,GLOBALS)
     })
     GLOBALS.client.on('messageReactionAdd', (reaction, user) => {
       if (user.bot) return // ignore messages from the bot itself or other bots
@@ -38,6 +38,9 @@ const handleMatchCreation = async (matchRecord, userMessage, GLOBALS) => {
     }
 
     case 1: {
+        matchRecord.creationInformation.rankMinimum = 0;
+        break
+      /*
       if (content === 'any') {
         matchRecord.creationInformation.rankMinimum = 0
         break
@@ -47,9 +50,14 @@ const handleMatchCreation = async (matchRecord, userMessage, GLOBALS) => {
         matchRecord.creationInformation.rankMinimum = CONSTANTS.RANKS[userMessage.content.toUpperCase()] // TODO: cover edge cases
         break
       }
+      */
     }
-/*
+
     case 2: {
+
+        matchRecord.creationInformation.rankMaximum = 99;
+        break
+      /*
       if (content === 'any') {
         matchRecord.creationInformation.rankMaximum = 99
         break
@@ -61,8 +69,9 @@ const handleMatchCreation = async (matchRecord, userMessage, GLOBALS) => {
         matchRecord.creationInformation.rankMaximum = CONSTANTS.RANKS[userMessage.content.toUpperCase()] // TODO: cover edge cases
         break
       }
+      */
     }
-
+/*
     case 3: {
       if (!Number(content)) {
         return userMessage.reply('please give a valid number!').then(msg => msg.delete({ timeout: 5000 }))
@@ -74,11 +83,11 @@ const handleMatchCreation = async (matchRecord, userMessage, GLOBALS) => {
       }
     }
 */
-    case 4:
+    case 3:
       matchRecord.creationInformation.spectators = (CONSTANTS.AFFIRMATIVE_WORDS.includes(content)) ? [] : false
       break
 
-    case 5: {
+    case 4: {
       if (content === 'any') {
         matchRecord.creationInformation.map = CONSTANTS.MAPS[Math.floor(Math.random() * Math.floor(CONSTANTS.MAPS.length))]
         break
