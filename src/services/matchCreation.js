@@ -136,6 +136,8 @@ const handleMatchCreationSerious = async (matchRecord, userMessage, GLOBALS) => 
   const content = userMessage.content.toLowerCase()
   switch (matchRecord.step) {
     case 0: {
+      matchRecord.creationInformation.mode = 'Standard'
+      matchRecord.creationInformation.maxTeamCount = 5
       const date = chrono.parseDate(`${userMessage.content} ${moment.tz.zone(process.env.TIME_ZONE).abbr(Date.now())}`)
       if (!date) return userMessage.reply('please give a valid date!').then(msg => msg.delete({ timeout: 5000 }))
       matchRecord.creationInformation.date = date
@@ -167,23 +169,12 @@ const handleMatchCreationSerious = async (matchRecord, userMessage, GLOBALS) => 
         break
       }
     }
-
-    case 3: {
-      if (!Number(content)) {
-        return userMessage.reply('please give a valid number!').then(msg => msg.delete({ timeout: 5000 }))
-      } else if (Number(content) > CONSTANTS.MAX_TEAM_COUNT || Number(content) < 1) {
-        return userMessage.reply('that number does not fit the amount of players allowed on a team, which is ' + CONSTANTS.MAX_TEAM_COUNT).then(msg => msg.delete({ timeout: 5000 }))
-      } else {
-        matchRecord.creationInformation.maxTeamCount = Number(content)
-        break
-      }
-    }
-
-    case 4:
+  
+    case 3:
       matchRecord.creationInformation.spectators = (CONSTANTS.AFFIRMATIVE_WORDS.includes(content)) ? [] : false
       break
 
-    case 5: {
+    case 4: {
       if (content === 'any') {
         matchRecord.creationInformation.map = CONSTANTS.MAPS[Math.floor(Math.random() * Math.floor(CONSTANTS.MAPS.length))]
         break
@@ -195,14 +186,7 @@ const handleMatchCreationSerious = async (matchRecord, userMessage, GLOBALS) => 
       }
     }
 
-    case 6: {
-      if (CONSTANTS.GAME_MODES.includes(content)) {
-        matchRecord.creationInformation.mode = CONSTANTS.GAME_MODES.find(e => e === content) || content
-        break
-      } else {
-        return userMessage.reply('please give a valid game mode!').then(msg => msg.delete({ timeout: 5000 }))
-      }
-    }
+    
   }
 
   if (matchRecord.step < CONSTANTS.matchCreationStepsSerious.length - 1) {
