@@ -26,7 +26,13 @@ module.exports = exports = {
     'DIAMOND 2': 62,
     'DIAMOND 3': 63,
 
-    'IMMORTAL': 71, // eslint-disable-line quote-props
+    'ASCENDANT 1': 64,
+    'ASCENDANT 2': 65,
+    'ASCENDANT 3': 66,
+
+    'IMMORTAL 1': 71,
+    'IMMORTAL 2': 72,
+    'IMMORTAL 3': 73, // eslint-disable-line quote-props
 
     'RADIANT': 81, // eslint-disable-line quote-props
 
@@ -52,14 +58,17 @@ module.exports = exports = {
     61: 'DIAMOND 1',
     62: 'DIAMOND 2',
     63: 'DIAMOND 3',
-    71: 'IMMORTAL 1',
-    72: "IMMORTAL 2",
-    73: "IMMORTAL 3",
+    64: 'ASCENDANT 1',
+    65:'ASCENDANT 2',
+    66:'ASCENDANT 3',
+    71:'IMMORTAL 1',
+    72:'IMMORTAL 2',
+    73:'IMMORTAL 3',
     81: 'RADIANT',
     99: 'ANY MAX'
   },
 
-  MAPS: ['split', 'bind', 'haven', 'ascent', 'icebox', 'breeze',"fracture"],
+  MAPS: ['split', 'bind', 'haven', 'ascent', 'icebox', 'breeze',"fracture","pearl"],
   MAPS_THUMBNAILS: {
     split: 'https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt2caea7a88362d6aa/5ecd64b0817e574fa1dcc162/split-minimap-2.png',
     bind: 'https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/bltad4274632c983531/5ecd64d04d187c101f3f2486/bind-minimap-2.png',
@@ -67,7 +76,8 @@ module.exports = exports = {
     ascent: 'https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt47bef6aa9e43d8ec/5ecd64df96a8996de38bbf8f/ascent-minimap-2.jpg',
     icebox: 'https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt727aeefa1875f8ce/5fc9954afd99385ff600b0f6/Icebox_1a.jpg',
     breeze: 'https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt1aa82531c6b3a04b/607fa05b33cf413db790d632/breeze_1a.jpg',
-    fracture: 'https://cdnportal.mobalytics.gg/production/2021/09/7fdd8774-fracture-mobalytics-map.png'
+    fracture: 'https://cdnportal.mobalytics.gg/production/2021/09/7fdd8774-fracture-mobalytics-map.png',
+    pearl: 'https://cdn-images.win.gg/resize/w/1000/format/webp/type/progressive/fit/cover/path/wp/uploads/2022/07/Pearl_-_Valorant-1024x1024.png'
   },
 
   //GAME_MODES: ['standard', 'spike rush', 'deathmatch'],
